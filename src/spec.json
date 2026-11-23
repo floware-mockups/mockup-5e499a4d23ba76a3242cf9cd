@@ -74,10 +74,10 @@
         "Tipo intervento",
         "Indirizzo",
         "Tecnico incaricato",
-        "Data sopralluogo",
+        "Data intervento",
         "Scadenza",
         "Stato",
-        "Turno"
+        "Durata prevista (ore)"
       ],
       "rows": [
         [
@@ -88,7 +88,7 @@
           "16/06/2026",
           "18/06/2026",
           "In programma",
-          "Mattina"
+          "2"
         ],
         [
           "Giardino Vela",
@@ -98,7 +98,7 @@
           "17/06/2026",
           "19/06/2026",
           "Da riprogrammare",
-          "Mattina"
+          "2"
         ],
         [
           "Prato Nubi",
@@ -108,7 +108,7 @@
           "18/06/2026",
           "22/06/2026",
           "In programma",
-          "Mattina"
+          "2"
         ],
         [
           "Viale delle Felci",
@@ -118,7 +118,7 @@
           "18/06/2026",
           "23/06/2026",
           "Controllo da fare",
-          "Mattina"
+          "2"
         ],
         [
           "Radura Zefiro",
@@ -266,9 +266,10 @@
         "Tipo intervento",
         "Indirizzo",
         "Tecnico incaricato",
-        "Data sopralluogo",
+        "Data intervento",
         "Scadenza",
-        "Stato"
+        "Stato",
+        "Durata prevista (ore)"
       ]
     },
     {
@@ -493,7 +494,7 @@
     {
       "name": "ConfermaInserimentoFeriale",
       "title": "Controllo nuovi inserimenti",
-      "description": "Blocca gli inserimenti con turno non consentito o date non feriali.",
+      "description": "Verifica giorni feriali e carico giornaliero e settimanale dei quattro operatori.",
       "role": "confirm",
       "events": [
         "add"
@@ -501,8 +502,8 @@
     },
     {
       "name": "SchedaProgrammazioneFeriale",
-      "title": "Programmazione feriale al mattino",
-      "description": "Modifica con controllo dei giorni feriali e attrezzatura automatica in base al guardrail.",
+      "title": "Programmazione e capacità operatori",
+      "description": "Modifica con controllo del carico ed esclusione dell'intervento corrente dal conteggio preesistente.",
       "role": "detail"
     }
   ]
