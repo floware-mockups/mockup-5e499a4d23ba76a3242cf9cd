@@ -72,7 +72,7 @@
       "columns": [
         "Area",
         "Tipo intervento",
-        "Indirizzo",
+        "Turno",
         "Tecnico incaricato",
         "Data intervento",
         "Scadenza",
@@ -83,7 +83,7 @@
         [
           "Parco Lumo",
           "Sfalcio con macchina multifunzionale",
-          "Via delle Lanterne 12",
+          "Mattina",
           "Rivo",
           "16/06/2026",
           "18/06/2026",
@@ -93,7 +93,7 @@
         [
           "Giardino Vela",
           "Sfalcio con macchina multifunzionale",
-          "Vicolo dei Salici 4",
+          "Mattina",
           "Mira",
           "17/06/2026",
           "19/06/2026",
@@ -103,7 +103,7 @@
         [
           "Prato Nubi",
           "Sfalcio con macchina multifunzionale",
-          "Piazza delle Cicale 3",
+          "Mattina",
           "Timo",
           "18/06/2026",
           "22/06/2026",
@@ -113,7 +113,7 @@
         [
           "Viale delle Felci",
           "Controllo erba",
-          "Corso dei Gelsi 8",
+          "Mattina",
           "Leda",
           "18/06/2026",
           "23/06/2026",
@@ -123,7 +123,7 @@
         [
           "Radura Zefiro",
           "Sfalcio con macchina multifunzionale",
-          "Strada dei Ranuncoli 6",
+          "Mattina",
           "Rivo",
           "19/06/2026",
           "22/06/2026",
@@ -133,7 +133,7 @@
         [
           "Parco delle Lucciole",
           "Sfalcio con macchina multifunzionale",
-          "Via delle Ninfee 15",
+          "Mattina",
           "Mira",
           "19/06/2026",
           "23/06/2026",
@@ -143,7 +143,7 @@
         [
           "Prato Mirto",
           "Sfalcio con macchina multifunzionale",
-          "Largo delle Margherite 2",
+          "Mattina",
           "Timo",
           "22/06/2026",
           "24/06/2026",
@@ -153,7 +153,7 @@
         [
           "Giardino Brina",
           "Controllo erba",
-          "Via dei Papaveri 9",
+          "Mattina",
           "Leda",
           "22/06/2026",
           "25/06/2026",
@@ -163,7 +163,7 @@
         [
           "Parco delle Querce",
           "Sfalcio con macchina multifunzionale",
-          "Via dei Tigli 21",
+          "Mattina",
           "Rivo",
           "23/06/2026",
           "25/06/2026",
@@ -173,7 +173,7 @@
         [
           "Parco del Borgo",
           "Sfalcio con macchina multifunzionale",
-          "Via del Mulino 7",
+          "Mattina",
           "Mira",
           "23/06/2026",
           "26/06/2026",
@@ -183,7 +183,7 @@
         [
           "Parco delle Fontane",
           "Sfalcio con macchina multifunzionale",
-          "Viale delle Acacie 18",
+          "Mattina",
           "Timo",
           "24/06/2026",
           "26/06/2026",
@@ -193,7 +193,7 @@
         [
           "Parco Aurora",
           "Sfalcio con macchina multifunzionale",
-          "Via del Poggio 32",
+          "Mattina",
           "Leda",
           "24/06/2026",
           "27/06/2026",
@@ -203,7 +203,7 @@
         [
           "Parco del Cedro",
           "Sfalcio con macchina multifunzionale",
-          "Piazza dei Platani 5",
+          "Mattina",
           "Rivo",
           "25/06/2026",
           "27/06/2026",
@@ -213,7 +213,7 @@
         [
           "Ciglio stradale – Via del Porto",
           "Sfalcio ciglio stradale",
-          "Via del Porto, tratto nord",
+          "Mattina",
           "Mira",
           "25/06/2026",
           "29/06/2026",
@@ -223,7 +223,7 @@
         [
           "Ciglio stradale – Via dei Pini",
           "Sfalcio ciglio stradale",
-          "Via dei Pini, tratto est",
+          "Mattina",
           "Timo",
           "26/06/2026",
           "29/06/2026",
@@ -233,7 +233,7 @@
         [
           "Ciglio stradale – Strada Nuova",
           "Sfalcio ciglio stradale",
-          "Strada Nuova, tratto sud",
+          "Mattina",
           "Leda",
           "26/06/2026",
           "30/06/2026",
@@ -243,7 +243,7 @@
         [
           "Ciglio stradale – Viale del Sole",
           "Sfalcio ciglio stradale",
-          "Viale del Sole, tratto ovest",
+          "Mattina",
           "Rivo",
           "29/06/2026",
           "01/07/2026",
@@ -253,7 +253,7 @@
         [
           "Ciglio stradale – Via delle Vigne",
           "Sfalcio ciglio stradale",
-          "Via delle Vigne, tratto centrale",
+          "Mattina",
           "Mira",
           "29/06/2026",
           "02/07/2026",
@@ -264,7 +264,7 @@
       "form": [
         "Area",
         "Tipo intervento",
-        "Indirizzo",
+        "Turno",
         "Tecnico incaricato",
         "Data intervento",
         "Scadenza",
@@ -647,6 +647,81 @@
         "recurrenceColumn": 5,
         "completedColumn": 6
       }
+    },
+    {
+      "id": "assegnazioni-mezzi",
+      "title": "Assegnazioni mezzi",
+      "description": "Dati dimostrativi collegati agli interventi tramite Area. Usare un’area univoca.",
+      "metrics": [],
+      "columns": [
+        "Area",
+        "Guardrail",
+        "Mezzo assegnato"
+      ],
+      "rows": [
+        [
+          "Ciglio stradale – Via del Porto",
+          "Da verificare",
+          "Da assegnare"
+        ],
+        [
+          "Ciglio stradale – Via dei Pini",
+          "Da verificare",
+          "Da assegnare"
+        ],
+        [
+          "Ciglio stradale – Strada Nuova",
+          "Da verificare",
+          "Da assegnare"
+        ],
+        [
+          "Ciglio stradale – Viale del Sole",
+          "Da verificare",
+          "Da assegnare"
+        ],
+        [
+          "Ciglio stradale – Via delle Vigne",
+          "Da verificare",
+          "Da assegnare"
+        ]
+      ],
+      "form": [
+        "Area",
+        "Guardrail",
+        "Mezzo assegnato"
+      ]
+    },
+    {
+      "id": "risorse-interventi",
+      "title": "Risorse degli interventi",
+      "description": "Assegnazioni dimostrative collegate agli interventi tramite Area univoca.",
+      "metrics": [],
+      "columns": [
+        "Area",
+        "Risorsa"
+      ],
+      "rows": [
+        [
+          "Parco Lumo",
+          "Macchina multifunzionale"
+        ],
+        [
+          "Parco delle Lucciole",
+          "Da assegnare"
+        ],
+        [
+          "Parco delle Querce",
+          "Macchina multifunzionale"
+        ],
+        [
+          "Parco del Borgo",
+          "Da assegnare"
+        ]
+      ],
+      "form": [
+        "Area",
+        "Risorsa"
+      ]
     }
   ],
   "theme": {
@@ -657,7 +732,7 @@
     {
       "name": "ConfermaInserimentoFeriale",
       "title": "Controllo nuovi inserimenti",
-      "description": "Verifica giorni feriali e carico giornaliero e settimanale dei quattro operatori.",
+      "description": "Controlla programmazione, guardrail e disponibilità dei decespugliatori.",
       "role": "confirm",
       "events": [
         "add"
@@ -665,16 +740,23 @@
     },
     {
       "name": "SchedaProgrammazioneFeriale",
-      "title": "Programmazione e capacità operatori",
-      "description": "Modifica con controllo del carico ed esclusione dell'intervento corrente dal conteggio preesistente.",
+      "title": "Scheda di programmazione controllata",
+      "description": "Modifica con blocco del metodo non consentito e verifica della disponibilità.",
       "role": "detail"
     },
     {
       "name": "CalcoloScadenzeVerde",
-      "title": "Priorità e scadenze automatiche",
-      "description": "Calcolo automatico e selezione della priorità per area, conservata in memoria senza nuove colonne.",
+      "title": "Programmazione coordinata controllata",
+      "description": "Verifica metodo e disponibilità prima di aggiornare interventi e turni.",
       "role": "section",
       "pageId": "registro-interventi",
+      "position": "top"
+    },
+    {
+      "name": "ControlloTaglioPubblico",
+      "title": "Taglio delle aree pubbliche",
+      "description": "Riepilogo delle anomalie e modulo controllato con risorsa collegata per area.",
+      "role": "section",
       "position": "top"
     }
   ]

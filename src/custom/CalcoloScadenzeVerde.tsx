@@ -2,67 +2,28 @@
 import { customTicker, customTimers } from "../customGuard.ts";
 const __mk = customTicker("CalcoloScadenzeVerde");
 const { setTimeout, setInterval, clearTimeout, clearInterval } = customTimers("CalcoloScadenzeVerde");
-import { useEffect, useState } from "react";
-import { Card, Select, useTable, type SectionProps } from "../floware";
-
-const priorita: Record<string, string> = {};
-function dataValida(t: string) {__mk();
-  const testo = t.trim();
-  const italiana = testo.includes("/");
-  const parti = testo.split(italiana ? "/" : "-");
-  if (parti.length !== 3) return null;
-  const ig = italiana ? 0 : 2;
-  const ia = italiana ? 2 : 0;
-  const g = Number(parti[ig]);
-  const m = Number(parti[1]);
-  const a = Number(parti[ia]);
-  const d = new Date(a, m - 1, g, 12);
-  if (!Number.isInteger(a) || a < 1900 || a > 9998 || d.getFullYear() !== a || d.getMonth() !== m - 1 || d.getDate() !== g) return null;
-  return d;
-}
-function scadenza(t: string, livello: string) {__mk();
-  const d = dataValida(t);
-  if (!d) return "";
-  d.setDate(d.getDate() + (livello === "Alta" ? 20 : livello === "Bassa" ? 40 : 30));
-  const g = String(d.getDate()).padStart(2, "0");
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  return g + "/" + m + "/" + d.getFullYear();
-}
-export default function CalcoloScadenzeVerde({ pageId }: SectionProps) {__mk();
-  const table = useTable(pageId);
-  const aree = useTable("aree-territoriali");
-  const [versione, setVersione] = useState(0);
-  const disponibili = table && ["Area", "Data intervento", "Scadenza"].every((c) => (__mk(), table.column(c) >= 0));
-  const righe = disponibili && table ? table.rows.map((r, indice) => {__mk();
-    const area = table.value(r, "Area");
-    const indirizzo = table.column("Indirizzo") >= 0 ? table.value(r, "Indirizzo") : "";
-    const chiave = area + "|" + indirizzo;
-    const collegata = aree && aree.column("Area") >= 0 && aree.column("Urgenza") >= 0 ? aree.findRows("Area", area)[0] : undefined;
-    const urgenza = aree && collegata !== undefined ? aree.value(collegata, "Urgenza") : "Media";
-    const livello = priorita[chiave] || (["Alta", "Media", "Bassa"].includes(urgenza) ? urgenza : "Media");
-    const data = table.value(r, "Data intervento");
-    return { indice, area, chiave, livello, data, prevista: scadenza(data, livello), attuale: table.value(r, "Scadenza") };
-  }) : [];
-  useEffect(() => {__mk();
-    if (!table || !disponibili) return;
-    righe.forEach((r) => {__mk();
-      const chiave = r.chiave;
-      if (!priorita[chiave]) priorita[chiave] = r.livello;
-      if (r.prevista && r.prevista !== r.attuale) table.setCell(r.indice, "Scadenza", r.prevista);
-    });
-  }, [table, aree, versione]);
-  if (!table) return null;
-  if (!disponibili) return <Card title="Priorità e scadenze"><p>Servono le colonne Area, Data intervento e Scadenza.</p></Card>;
-  return <Card title="Priorità e scadenze automatiche"><div className="space-y-4">
-    <p>Alta: 20 giorni. Media: 30 giorni. Bassa: 40 giorni. Il conteggio parte dalla Data intervento e comprende sabati e domeniche.</p>
-    <p className="text-(--mk-muted)">Le priorità sono conservate in memoria per area, senza nuove colonne. Anche modificando la Data intervento la scadenza viene ricalcolata.</p>
-    <div className="max-h-96 overflow-auto space-y-3">
-      {righe.map((r) => (__mk(), <section key={r.indice} className="border border-(--mk-border) rounded-lg p-3 space-y-2">
-        <h3 className="font-semibold">{r.area || "Area non indicata"}</h3>
-        <Select label="Priorità dell’area" value={r.livello} options={["Alta", "Media", "Bassa"]} onChange={(v) => {__mk(); const chiave = r.chiave; priorita[chiave] = v; setVersione((n) => (__mk(), n + 1)); }} />
-        <p>Data intervento: {r.data || "Non indicata"} · Scadenza: {r.prevista || "Non calcolabile"}</p>
-        {!r.prevista && <p className="text-(--mk-danger)">Correggi Data intervento in formato GG/MM/AAAA o AAAA-MM-GG. La scadenza esistente non viene modificata.</p>}
-      </section>))}
-    </div>
-  </div></Card>;
+import { useState } from "react";
+import { Card, Button, TextInput, Select, useTable, usePrototype } from "../floware";
+function data(t){__mk();const it=t.includes("/"),p=t.trim().split(it?"/":"-"),ig=it?0:2,ia=it?2:0,g=Number(p[ig]),m=Number(p[1]),a=Number(p[ia]),d=new Date(a,m-1,g);return p.length===3&&a>=1900&&a<9999&&d.getFullYear()===a&&d.getMonth()===m-1&&d.getDate()===g?d:null;}
+function testo(d){__mk();return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear();}
+function settimana(d){__mk();return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()-(d.getDay()+6)%7);}
+export default function CalcoloScadenzeVerde(props){__mk();
+ const t=useTable(props.pageId),turni=useTable("turni-e-priorita"),a=useTable("assegnazioni-mezzi"),s=useTable("squadra-e-mezzi"),{notify,openDetail}=usePrototype();
+ const [inizio,setInizio]=useState("2026-06-16"),[scelta,setScelta]=useState(""),[giorno,setGiorno]=useState(""),[limite,setLimite]=useState(""),[motivo,setMotivo]=useState("Programmazione ordinaria"),[errore,setErrore]=useState("");
+ if(!t||!turni)return null;
+ if(["Area","Tipo intervento","Data intervento","Scadenza","Turno","Stato","Tecnico incaricato","Durata prevista (ore)"].some(c=>(__mk(), t.column(c)<0))||["Area","Turno","Motivo","Nuova scadenza","Stato"].some(c=>(__mk(), turni.column(c)<0)))return <Card title="Programmazione"><p>Mancano colonne necessarie.</p></Card>;
+ const etichette=t.rows.map((r,n)=>(__mk(), String(n+1)+" · "+t.value(r,"Area"))),i=etichette.indexOf(scelta),valida=i>=0;
+ const scegli=v=>{__mk();setScelta(v);setErrore("");const n=etichette.indexOf(v);if(n>=0){setGiorno(t.value(n,"Data intervento"));setLimite(t.value(n,"Scadenza"));}};
+ const salva=()=>{__mk();
+ const blocca=x=>(__mk(), setErrore(x+" Nessuna modifica salvata."));setErrore("");if(!valida)return;
+ const dal=data(inizio),d=data(giorno),sc=data(limite);if(!dal||!d||!sc||[0,6].includes(d.getDay())||[0,6].includes(sc.getDay())){blocca("Indica date valide e feriali per lavoro e scadenza.");return;}const al=new Date(dal.getTime());al.setDate(al.getDate()+6);if(d<dal||d>al||sc<d||sc>al){blocca("Lavoro e scadenza devono rientrare nei 7 giorni, in ordine cronologico.");return;}
+ const area=t.value(i,"Area"),tipo=t.value(i,"Tipo intervento"),pronto=a&&["Area","Guardrail","Mezzo assegnato"].every(c=>(__mk(), a.column(c)>=0)),indici=pronto?a.findRows("Area",area):[],ciglio=area.toLowerCase().includes("ciglio")||tipo.toLowerCase().includes("ciglio")||indici.length>0;
+ const g=indici.length===1?a.value(indici[0],"Guardrail"):"",m=indici.length===1?a.value(indici[0],"Mezzo assegnato"):"";
+ if(ciglio){if(!pronto||indici.length!==1||!["Presente","Assente"].includes(g)){blocca("Completa il guardrail e l’assegnazione univoca nella scheda.");return;}if(g==="Presente"&&(m!=="Decespugliatore"||!["Sfalcio ciglio stradale","Sfalcio con decespugliatore"].includes(tipo.trim()))){blocca("Con guardrail lo sfalcio è consentito esclusivamente con decespugliatore. Correggi mezzo e metodo nella scheda.");return;}if(g==="Assente"&&m!=="Trattore"){blocca("Senza guardrail è consentito solo Trattore.");return;}}
+ if(m==="Decespugliatore"){
+ if(!s||["Risorsa","Quantità","Disponibilità"].some(c=>(__mk(), s.column(c)<0))){blocca("Dati di Squadra e mezzi incompleti.");return;}let liberi=0;s.rows.forEach(r=>{__mk();if(s.value(r,"Risorsa").toLowerCase().includes("decespugliator")&&["disponibile","disponibili"].includes(s.value(r,"Disponibilità").trim().toLowerCase())){const q=Number(s.value(r,"Quantità"));if(Number.isInteger(q)&&q>0)liberi+=q;}});t.rows.forEach((r,n)=>{__mk();if(n===i)return;const x=data(t.value(r,"Data intervento"));if(!x||x.getTime()!==d.getTime()||t.value(r,"Turno")!=="Mattina"||["Completato","Completata","Annullato"].includes(t.value(r,"Stato")))return;if(a.findRows("Area",t.value(r,"Area")).some(j=>(__mk(), a.value(j,"Mezzo assegnato")==="Decespugliatore")))liberi--;});if(liberi<=0){blocca("Nessun decespugliatore disponibile per data e turno. Controlla Squadra e mezzi o riprogramma.");return;}}
+ const tecnico=t.value(i,"Tecnico incaricato"),h=Number(t.value(i,"Durata prevista (ore)").replace(",","."));if(!["Rivo","Mira","Timo","Leda"].includes(tecnico)||!Number.isFinite(h)||h<=0){blocca("Correggi tecnico e durata numerica positiva nella scheda.");return;}
+ let ore=h,problema="";const giorni=new Set([d.getTime()]);t.rows.forEach((r,n)=>{__mk();if(n===i||t.value(r,"Tecnico incaricato")!==tecnico)return;const x=data(t.value(r,"Data intervento"));if(!x){problema="Correggi le date del tecnico.";return;}if(settimana(x)!==settimana(d))return;giorni.add(x.getTime());const q=Number(t.value(r,"Durata prevista (ore)").replace(",","."));if(!Number.isFinite(q)||q<=0)problema="Correggi le durate del tecnico nella settimana.";else if(x.getTime()===d.getTime())ore+=q;});if(problema||ore>2||giorni.size>5){blocca(problema||"Limite: 2 ore al giorno e 5 giorni per settimana per operatore.");return;}
+ const righe=turni.findRows("Area",area);if(!area.trim()||t.findRows("Area",area).length!==1||righe.length>1){blocca("Occorre un’area univoca.");return;}const stato=t.value(i,"Stato")==="Lavoro urgente"?"Lavoro urgente":"In programma";t.setCell(i,"Data intervento",testo(d));t.setCell(i,"Scadenza",testo(sc));t.setCell(i,"Turno","Mattina");t.setCell(i,"Stato",stato);if(righe.length){const n=righe[0];turni.setCell(n,"Turno","Mattina");turni.setCell(n,"Nuova scadenza",testo(sc));turni.setCell(n,"Motivo",motivo);turni.setCell(n,"Stato",stato);}else turni.addRow({"Area":area,"Turno":"Mattina","Motivo":motivo,"Nuova scadenza":testo(sc),"Stato":stato});notify("Programmazione e turni aggiornati in memoria.");};
+ return <Card title="Programmazione mobile: 7 giorni"><div className="space-y-3"><p>Con guardrail: sfalcio esclusivamente con decespugliatore. Disponibilità controllata in Squadra e mezzi e nelle assegnazioni per data e turno.</p><TextInput label="Inizio finestra" type="date" value={inizio} onChange={setInizio}/><Select label="Intervento" value={scelta} options={["",...etichette]} onChange={scegli}/>{valida&&<Button variant="secondary" onClick={()=>(__mk(), openDetail(props.pageId,i))}>Apri scheda di programmazione</Button>}<TextInput label="Data intervento · GG/MM/AAAA" value={giorno} onChange={setGiorno}/><TextInput label="Scadenza · GG/MM/AAAA" value={limite} onChange={setLimite}/><Select label="Motivo" value={motivo} options={["Programmazione ordinaria","Ripianificazione per maltempo","Lavoro urgente"]} onChange={setMotivo}/>{errore&&<p role="alert" className="text-(--mk-danger)">{errore}</p>}<Button onClick={salva} disabled={!valida}>Salva programmazione coordinata</Button></div></Card>;
 }
