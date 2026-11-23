@@ -3,27 +3,56 @@ import { customTicker, customTimers } from "../customGuard.ts";
 const __mk = customTicker("CalcoloScadenzeVerde");
 const { setTimeout, setInterval, clearTimeout, clearInterval } = customTimers("CalcoloScadenzeVerde");
 import { useState } from "react";
-import { Card, Button, TextInput, Select, useTable, usePrototype } from "../floware";
-function data(t){__mk();const it=t.includes("/"),p=t.trim().split(it?"/":"-"),ig=it?0:2,ia=it?2:0,g=Number(p[ig]),m=Number(p[1]),a=Number(p[ia]),d=new Date(a,m-1,g);return p.length===3&&a>=1900&&a<9999&&d.getFullYear()===a&&d.getMonth()===m-1&&d.getDate()===g?d:null;}
-function testo(d){__mk();return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear();}
-function settimana(d){__mk();return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()-(d.getDay()+6)%7);}
-export default function CalcoloScadenzeVerde(props){__mk();
- const t=useTable(props.pageId),turni=useTable("turni-e-priorita"),a=useTable("assegnazioni-mezzi"),s=useTable("squadra-e-mezzi"),{notify,openDetail}=usePrototype();
- const [inizio,setInizio]=useState("2026-06-16"),[scelta,setScelta]=useState(""),[giorno,setGiorno]=useState(""),[limite,setLimite]=useState(""),[motivo,setMotivo]=useState("Programmazione ordinaria"),[errore,setErrore]=useState("");
- if(!t||!turni)return null;
- if(["Area","Tipo intervento","Data intervento","Scadenza","Turno","Stato","Tecnico incaricato","Durata prevista (ore)"].some(c=>(__mk(), t.column(c)<0))||["Area","Turno","Motivo","Nuova scadenza","Stato"].some(c=>(__mk(), turni.column(c)<0)))return <Card title="Programmazione"><p>Mancano colonne necessarie.</p></Card>;
- const etichette=t.rows.map((r,n)=>(__mk(), String(n+1)+" · "+t.value(r,"Area"))),i=etichette.indexOf(scelta),valida=i>=0;
- const scegli=v=>{__mk();setScelta(v);setErrore("");const n=etichette.indexOf(v);if(n>=0){setGiorno(t.value(n,"Data intervento"));setLimite(t.value(n,"Scadenza"));}};
- const salva=()=>{__mk();
- const blocca=x=>(__mk(), setErrore(x+" Nessuna modifica salvata."));setErrore("");if(!valida)return;
- const dal=data(inizio),d=data(giorno),sc=data(limite);if(!dal||!d||!sc||[0,6].includes(d.getDay())||[0,6].includes(sc.getDay())){blocca("Indica date valide e feriali per lavoro e scadenza.");return;}const al=new Date(dal.getTime());al.setDate(al.getDate()+6);if(d<dal||d>al||sc<d||sc>al){blocca("Lavoro e scadenza devono rientrare nei 7 giorni, in ordine cronologico.");return;}
- const area=t.value(i,"Area"),tipo=t.value(i,"Tipo intervento"),pronto=a&&["Area","Guardrail","Mezzo assegnato"].every(c=>(__mk(), a.column(c)>=0)),indici=pronto?a.findRows("Area",area):[],ciglio=area.toLowerCase().includes("ciglio")||tipo.toLowerCase().includes("ciglio")||indici.length>0;
- const g=indici.length===1?a.value(indici[0],"Guardrail"):"",m=indici.length===1?a.value(indici[0],"Mezzo assegnato"):"";
- if(ciglio){if(!pronto||indici.length!==1||!["Presente","Assente"].includes(g)){blocca("Completa il guardrail e l’assegnazione univoca nella scheda.");return;}if(g==="Presente"&&(m!=="Decespugliatore"||!["Sfalcio ciglio stradale","Sfalcio con decespugliatore"].includes(tipo.trim()))){blocca("Con guardrail lo sfalcio è consentito esclusivamente con decespugliatore. Correggi mezzo e metodo nella scheda.");return;}if(g==="Assente"&&m!=="Trattore"){blocca("Senza guardrail è consentito solo Trattore.");return;}}
- if(m==="Decespugliatore"){
- if(!s||["Risorsa","Quantità","Disponibilità"].some(c=>(__mk(), s.column(c)<0))){blocca("Dati di Squadra e mezzi incompleti.");return;}let liberi=0;s.rows.forEach(r=>{__mk();if(s.value(r,"Risorsa").toLowerCase().includes("decespugliator")&&["disponibile","disponibili"].includes(s.value(r,"Disponibilità").trim().toLowerCase())){const q=Number(s.value(r,"Quantità"));if(Number.isInteger(q)&&q>0)liberi+=q;}});t.rows.forEach((r,n)=>{__mk();if(n===i)return;const x=data(t.value(r,"Data intervento"));if(!x||x.getTime()!==d.getTime()||t.value(r,"Turno")!=="Mattina"||["Completato","Completata","Annullato"].includes(t.value(r,"Stato")))return;if(a.findRows("Area",t.value(r,"Area")).some(j=>(__mk(), a.value(j,"Mezzo assegnato")==="Decespugliatore")))liberi--;});if(liberi<=0){blocca("Nessun decespugliatore disponibile per data e turno. Controlla Squadra e mezzi o riprogramma.");return;}}
- const tecnico=t.value(i,"Tecnico incaricato"),h=Number(t.value(i,"Durata prevista (ore)").replace(",","."));if(!["Rivo","Mira","Timo","Leda"].includes(tecnico)||!Number.isFinite(h)||h<=0){blocca("Correggi tecnico e durata numerica positiva nella scheda.");return;}
- let ore=h,problema="";const giorni=new Set([d.getTime()]);t.rows.forEach((r,n)=>{__mk();if(n===i||t.value(r,"Tecnico incaricato")!==tecnico)return;const x=data(t.value(r,"Data intervento"));if(!x){problema="Correggi le date del tecnico.";return;}if(settimana(x)!==settimana(d))return;giorni.add(x.getTime());const q=Number(t.value(r,"Durata prevista (ore)").replace(",","."));if(!Number.isFinite(q)||q<=0)problema="Correggi le durate del tecnico nella settimana.";else if(x.getTime()===d.getTime())ore+=q;});if(problema||ore>2||giorni.size>5){blocca(problema||"Limite: 2 ore al giorno e 5 giorni per settimana per operatore.");return;}
- const righe=turni.findRows("Area",area);if(!area.trim()||t.findRows("Area",area).length!==1||righe.length>1){blocca("Occorre un’area univoca.");return;}const stato=t.value(i,"Stato")==="Lavoro urgente"?"Lavoro urgente":"In programma";t.setCell(i,"Data intervento",testo(d));t.setCell(i,"Scadenza",testo(sc));t.setCell(i,"Turno","Mattina");t.setCell(i,"Stato",stato);if(righe.length){const n=righe[0];turni.setCell(n,"Turno","Mattina");turni.setCell(n,"Nuova scadenza",testo(sc));turni.setCell(n,"Motivo",motivo);turni.setCell(n,"Stato",stato);}else turni.addRow({"Area":area,"Turno":"Mattina","Motivo":motivo,"Nuova scadenza":testo(sc),"Stato":stato});notify("Programmazione e turni aggiornati in memoria.");};
- return <Card title="Programmazione mobile: 7 giorni"><div className="space-y-3"><p>Con guardrail: sfalcio esclusivamente con decespugliatore. Disponibilità controllata in Squadra e mezzi e nelle assegnazioni per data e turno.</p><TextInput label="Inizio finestra" type="date" value={inizio} onChange={setInizio}/><Select label="Intervento" value={scelta} options={["",...etichette]} onChange={scegli}/>{valida&&<Button variant="secondary" onClick={()=>(__mk(), openDetail(props.pageId,i))}>Apri scheda di programmazione</Button>}<TextInput label="Data intervento · GG/MM/AAAA" value={giorno} onChange={setGiorno}/><TextInput label="Scadenza · GG/MM/AAAA" value={limite} onChange={setLimite}/><Select label="Motivo" value={motivo} options={["Programmazione ordinaria","Ripianificazione per maltempo","Lavoro urgente"]} onChange={setMotivo}/>{errore&&<p role="alert" className="text-(--mk-danger)">{errore}</p>}<Button onClick={salva} disabled={!valida}>Salva programmazione coordinata</Button></div></Card>;
+import { Card, Button, TextInput, Select, Badge, useTable, usePrototype } from "../floware";
+function giorno(testo) {__mk();
+ const s=testo.trim(),it=s.includes("/"),p=s.split(it?"/":"-");
+ if(p.length!==3)return null;
+ const ia=it?2:0,ig=it?0:2;
+ const a=Number(p[ia]),m=Number(p[1]),g=Number(p[ig]);
+ if(a<1900||a>9999||!Number.isInteger(a)||!Number.isInteger(m)||!Number.isInteger(g))return null;
+ const d=new Date(Date.UTC(a,m-1,g));
+ return d.getUTCFullYear()===a&&d.getUTCMonth()===m-1&&d.getUTCDate()===g?d.getTime()/86400000:null;
+}
+function etichetta(n) {__mk();
+ return new Date(n*86400000).toLocaleDateString("it-IT",{day:"2-digit",month:"2-digit",year:"numeric",timeZone:"UTC"});
+}
+function tratto(stato) {__mk();
+ if(stato==="Da riprogrammare")return "dashed";
+ if(stato==="Controllo da fare")return "dotted";
+ if(stato==="Lavoro urgente")return "double";
+ return "solid";
+}
+export default function CalcoloScadenzeVerde(props) {__mk();
+ const t=useTable(props.pageId),{openDetail}=usePrototype();
+ const [filtro,setFiltro]=useState("Tutti gli stati"),[cerca,setCerca]=useState(""),[scala,setScala]=useState("Compatta");
+ if(!t)return null;
+ if(["Area","Tipo intervento","Data intervento","Scadenza","Stato"].some(c=>(__mk(), t.column(c)<0)))return <Card title="Gantt degli interventi"><p>Servono le colonne Area, Tipo intervento, Data intervento, Scadenza e Stato.</p></Card>;
+ const stati=Array.from(new Set(t.rows.map(r=>(__mk(), t.value(r,"Stato")||"Non indicato"))));
+ const righe=t.rows.map((r,i)=>((__mk(), {i,area:t.value(r,"Area"),tipo:t.value(r,"Tipo intervento"),stato:t.value(r,"Stato")||"Non indicato",inizio:giorno(t.value(r,"Data intervento")),fine:giorno(t.value(r,"Scadenza"))})));
+ const valide=righe.filter(r=>(__mk(), r.inizio!==null&&r.fine!==null&&r.fine>=r.inizio));
+ const min=valide.reduce((n,r)=>(__mk(), Math.min(n,r.inizio)),valide.length?valide[0].inizio:0);
+ const max=valide.reduce((n,r)=>(__mk(), Math.max(n,r.fine)),min);
+ const durata=max-min+1;
+ const visibili=righe.filter(r=>(__mk(), (filtro==="Tutti gli stati"||r.stato===filtro)&&(r.area+" "+r.tipo).toLowerCase().includes(cerca.trim().toLowerCase())));
+ const posizioni=[0,0.25,0.5,0.75,1];
+ return <Card title="Gantt degli interventi sul verde"><div className="space-y-4">
+ <p className="text-(--mk-muted)">Ogni barra comprende il giorno iniziale e quello di scadenza. Apri un’attività per consultare o modificare la programmazione nella scheda esistente.</p>
+ <div className="grid gap-3 md:grid-cols-3"><TextInput label="Cerca area o tipo intervento" value={cerca} onChange={setCerca}/><Select label="Stato" value={filtro} options={["Tutti gli stati",...stati]} onChange={setFiltro}/><Select label="Scala del diagramma" value={scala} options={["Compatta","Estesa"]} onChange={setScala}/></div>
+ <div className="flex flex-wrap gap-3" aria-label="Legenda degli stati">{stati.map(s=>(__mk(), <div key={s} className="rounded border-4 border-(--mk-border) px-2 py-1 text-sm" style={{borderStyle:tratto(s)}}><Badge tone={s==="Lavoro urgente"?"danger":s==="In programma"?"primary":"neutral"}>{s}</Badge></div>))}</div>
+ <p className="text-sm text-(--mk-muted)">{visibili.length} attività visualizzate. {valide.length>0?"Periodo: "+etichetta(min)+" – "+etichetta(max):"Nessun intervallo valido."} La scala rimane invariata cambiando filtro.</p>
+ {visibili.length===0&&<p>Nessun intervento corrisponde ai filtri.</p>}
+ <div className="overflow-x-auto" aria-label="Diagramma di Gantt"><div style={{minWidth:scala==="Estesa"?"1500px":"900px"}}>
+ <div className="grid gap-4 border-b border-(--mk-divider) pb-3" style={{gridTemplateColumns:"260px 1fr"}}><strong>Area e tipo intervento</strong><div className="flex justify-between text-xs text-(--mk-muted)">{valide.length>0&&posizioni.map((p,i)=>(__mk(), <span key={i}>{etichetta(min+Math.round((durata-1)*p))}</span>))}</div></div>
+ {visibili.map(r=>{__mk();
+ const valida=r.inizio!==null&&r.fine!==null&&r.fine>=r.inizio;
+ const sinistra=valida?(r.inizio-min)/durata*100:0;
+ const larghezza=valida?(r.fine-r.inizio+1)/durata*100:0;
+ return <div key={r.i} className="grid items-center gap-4 border-b border-(--mk-divider) py-3" style={{gridTemplateColumns:"260px 1fr"}}>
+ <div className="space-y-1"><Button variant="link" onClick={()=>(__mk(), openDetail(props.pageId,r.i))}>{r.area||"Area non indicata"}</Button><p className="text-sm">{r.tipo}</p><Badge tone={r.stato==="Lavoro urgente"?"danger":r.stato==="In programma"?"primary":"neutral"}>{r.stato}</Badge></div>
+ <div>{valida?<><div className="rounded bg-(--mk-subtle) py-2"><div className="rounded border-4 border-(--mk-border) bg-(--mk-surface) p-1" style={{marginLeft:String(sinistra)+"%",width:String(larghezza)+"%",borderStyle:tratto(r.stato)}} title={r.area+" · "+r.tipo+" · "+r.stato+" · "+etichetta(r.inizio)+" – "+etichetta(r.fine)}><Button variant="secondary" onClick={()=>(__mk(), openDetail(props.pageId,r.i))}>Apri</Button></div></div><p className="mt-1 text-xs text-(--mk-muted)">{etichetta(r.inizio)} – {etichetta(r.fine)} · {r.stato}</p></>:<p className="text-(--mk-danger)">Intervallo non valido: correggi le date nella scheda.</p>}</div>
+ </div>;
+ })}
+ </div></div>
+ <p className="text-xs text-(--mk-muted)">Le modifiche nelle schede aggiornano il diagramma e restano in memoria.</p>
+ </div></Card>;
 }

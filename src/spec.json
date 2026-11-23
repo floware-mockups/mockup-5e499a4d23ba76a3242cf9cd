@@ -745,18 +745,18 @@
       "role": "detail"
     },
     {
-      "name": "CalcoloScadenzeVerde",
-      "title": "Programmazione coordinata controllata",
-      "description": "Verifica metodo e disponibilità prima di aggiornare interventi e turni.",
-      "role": "section",
-      "pageId": "registro-interventi",
-      "position": "top"
-    },
-    {
       "name": "ControlloTaglioPubblico",
       "title": "Taglio delle aree pubbliche",
       "description": "Riepilogo delle anomalie e modulo controllato con risorsa collegata per area.",
       "role": "section",
+      "position": "top"
+    },
+    {
+      "name": "CalcoloScadenzeVerde",
+      "title": "Gantt degli interventi sul verde",
+      "description": "Diagramma temporale con filtri, stati distinguibili e apertura delle schede.",
+      "role": "section",
+      "pageId": "registro-interventi",
       "position": "top"
     }
   ]
