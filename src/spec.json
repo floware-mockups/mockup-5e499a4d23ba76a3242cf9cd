@@ -44,20 +44,20 @@
           "Giardino Vela",
           "Taglio erba",
           "19/06/2026",
-          "Pomeriggio",
+          "Mattina",
           "Da riprogrammare"
         ],
         [
           "Prato Nubi",
           "Taglio erba",
-          "20/06/2026",
+          "22/06/2026",
           "Mattina",
           "In programma"
         ],
         [
           "Viale delle Felci",
           "Controllo erba",
-          "21/06/2026",
+          "23/06/2026",
           "Mattina",
           "Controllo da fare"
         ]
@@ -76,7 +76,8 @@
         "Tecnico incaricato",
         "Data sopralluogo",
         "Scadenza",
-        "Stato"
+        "Stato",
+        "Turno"
       ],
       "rows": [
         [
@@ -86,7 +87,8 @@
           "Rivo",
           "16/06/2026",
           "18/06/2026",
-          "In programma"
+          "In programma",
+          "Mattina"
         ],
         [
           "Giardino Vela",
@@ -95,7 +97,8 @@
           "Mira",
           "17/06/2026",
           "19/06/2026",
-          "Da riprogrammare"
+          "Da riprogrammare",
+          "Mattina"
         ],
         [
           "Prato Nubi",
@@ -103,8 +106,9 @@
           "Piazza delle Cicale 3",
           "Timo",
           "18/06/2026",
-          "20/06/2026",
-          "In programma"
+          "22/06/2026",
+          "In programma",
+          "Mattina"
         ],
         [
           "Viale delle Felci",
@@ -112,8 +116,9 @@
           "Corso dei Gelsi 8",
           "Leda",
           "18/06/2026",
-          "21/06/2026",
-          "Controllo da fare"
+          "23/06/2026",
+          "Controllo da fare",
+          "Mattina"
         ],
         [
           "Radura Zefiro",
@@ -122,7 +127,8 @@
           "Rivo",
           "19/06/2026",
           "22/06/2026",
-          "In programma"
+          "In programma",
+          "Mattina"
         ],
         [
           "Parco delle Lucciole",
@@ -131,25 +137,28 @@
           "Mira",
           "19/06/2026",
           "23/06/2026",
-          "Lavoro urgente"
+          "Lavoro urgente",
+          "Mattina"
         ],
         [
           "Prato Mirto",
           "Taglio erba",
           "Largo delle Margherite 2",
           "Timo",
-          "20/06/2026",
+          "22/06/2026",
           "24/06/2026",
-          "In programma"
+          "In programma",
+          "Mattina"
         ],
         [
           "Giardino Brina",
           "Controllo erba",
           "Via dei Papaveri 9",
           "Leda",
-          "20/06/2026",
+          "22/06/2026",
           "25/06/2026",
-          "Controllo da fare"
+          "Controllo da fare",
+          "Mattina"
         ]
       ],
       "form": [
@@ -190,7 +199,7 @@
       "rows": [
         [
           "Giardino Vela",
-          "Pomeriggio",
+          "Mattina",
           "Pioggia prevista",
           "19/06/2026",
           "Da riprogrammare"
@@ -213,14 +222,14 @@
           "Prato Nubi",
           "Mattina",
           "Turno confermato",
-          "20/06/2026",
+          "22/06/2026",
           "In programma"
         ],
         [
           "Viale delle Felci",
           "Mattina",
           "Controllare altezza erba",
-          "21/06/2026",
+          "23/06/2026",
           "Controllo da fare"
         ]
       ],
@@ -230,5 +239,22 @@
   "theme": {
     "palette": "terracotta",
     "fonts": "classico"
-  }
+  },
+  "custom": [
+    {
+      "name": "SchedaProgrammazioneFeriale",
+      "title": "Programmazione feriale al mattino",
+      "description": "Modifica della scheda con validazione prima del salvataggio.",
+      "role": "detail"
+    },
+    {
+      "name": "ConfermaInserimentoFeriale",
+      "title": "Controllo nuovi inserimenti",
+      "description": "Blocca gli inserimenti con turno non consentito o date non feriali.",
+      "role": "confirm",
+      "events": [
+        "add"
+      ]
+    }
+  ]
 }
