@@ -668,6 +668,14 @@
       "title": "Programmazione e capacità operatori",
       "description": "Modifica con controllo del carico ed esclusione dell'intervento corrente dal conteggio preesistente.",
       "role": "detail"
+    },
+    {
+      "name": "CalcoloScadenzeVerde",
+      "title": "Priorità e scadenze automatiche",
+      "description": "Calcolo automatico e selezione della priorità per area, conservata in memoria senza nuove colonne.",
+      "role": "section",
+      "pageId": "registro-interventi",
+      "position": "top"
     }
   ]
 }
