@@ -6,7 +6,7 @@
     {
       "id": "quadro-verde",
       "title": "Quadro del verde",
-      "description": "Controlla le scadenze vicine, i sopralluoghi e gli interventi da riprogrammare.",
+      "description": "Controlla gli interventi previsti in periodi di 5 giorni, i sopralluoghi e le attività da riprogrammare.",
       "metrics": [
         {
           "label": "Interventi in programma",
@@ -75,7 +75,7 @@
         "Turno",
         "Tecnico incaricato",
         "Data intervento",
-        "Scadenza",
+        "Periodo (giorni)",
         "Stato",
         "Durata prevista (ore)"
       ],
@@ -86,7 +86,7 @@
           "Mattina",
           "Rivo",
           "16/06/2026",
-          "18/06/2026",
+          "5 giorni",
           "In programma",
           "2"
         ],
@@ -96,7 +96,7 @@
           "Mattina",
           "Mira",
           "17/06/2026",
-          "19/06/2026",
+          "5 giorni",
           "Da riprogrammare",
           "2"
         ],
@@ -106,7 +106,7 @@
           "Mattina",
           "Timo",
           "18/06/2026",
-          "22/06/2026",
+          "5 giorni",
           "In programma",
           "2"
         ],
@@ -116,7 +116,7 @@
           "Mattina",
           "Leda",
           "18/06/2026",
-          "23/06/2026",
+          "5 giorni",
           "Controllo da fare",
           "2"
         ],
@@ -126,7 +126,7 @@
           "Mattina",
           "Rivo",
           "19/06/2026",
-          "22/06/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -136,7 +136,7 @@
           "Mattina",
           "Mira",
           "19/06/2026",
-          "23/06/2026",
+          "5 giorni",
           "Lavoro urgente",
           "Mattina"
         ],
@@ -146,7 +146,7 @@
           "Mattina",
           "Timo",
           "22/06/2026",
-          "24/06/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -156,7 +156,7 @@
           "Mattina",
           "Leda",
           "22/06/2026",
-          "25/06/2026",
+          "5 giorni",
           "Controllo da fare",
           "Mattina"
         ],
@@ -166,7 +166,7 @@
           "Mattina",
           "Rivo",
           "23/06/2026",
-          "25/06/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -176,7 +176,7 @@
           "Mattina",
           "Mira",
           "23/06/2026",
-          "26/06/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -186,7 +186,7 @@
           "Mattina",
           "Timo",
           "24/06/2026",
-          "26/06/2026",
+          "5 giorni",
           "Da riprogrammare",
           "Mattina"
         ],
@@ -196,7 +196,7 @@
           "Mattina",
           "Leda",
           "24/06/2026",
-          "27/06/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -206,7 +206,7 @@
           "Mattina",
           "Rivo",
           "25/06/2026",
-          "27/06/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -216,7 +216,7 @@
           "Mattina",
           "Mira",
           "25/06/2026",
-          "29/06/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -226,7 +226,7 @@
           "Mattina",
           "Timo",
           "26/06/2026",
-          "29/06/2026",
+          "5 giorni",
           "Controllo da fare",
           "Mattina"
         ],
@@ -236,7 +236,7 @@
           "Mattina",
           "Leda",
           "26/06/2026",
-          "30/06/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -246,7 +246,7 @@
           "Mattina",
           "Rivo",
           "29/06/2026",
-          "01/07/2026",
+          "5 giorni",
           "In programma",
           "Mattina"
         ],
@@ -256,7 +256,7 @@
           "Mattina",
           "Mira",
           "29/06/2026",
-          "02/07/2026",
+          "5 giorni",
           "Lavoro urgente",
           "Mattina"
         ]
@@ -267,7 +267,7 @@
         "Turno",
         "Tecnico incaricato",
         "Data intervento",
-        "Scadenza",
+        "Periodo (giorni)",
         "Stato",
         "Durata prevista (ore)"
       ]
@@ -294,7 +294,7 @@
         "Area",
         "Turno",
         "Motivo",
-        "Nuova scadenza",
+        "Periodo (giorni)",
         "Stato"
       ],
       "rows": [
@@ -302,35 +302,35 @@
           "Giardino Vela",
           "Mattina",
           "Pioggia prevista",
-          "19/06/2026",
+          "5 giorni",
           "Da riprogrammare"
         ],
         [
           "Parco delle Lucciole",
           "Mattina",
           "Lavoro urgente",
-          "23/06/2026",
+          "5 giorni",
           "Priorità alta"
         ],
         [
           "Parco Lumo",
           "Mattina",
           "Turno confermato",
-          "18/06/2026",
+          "5 giorni",
           "In programma"
         ],
         [
           "Prato Nubi",
           "Mattina",
           "Turno confermato",
-          "22/06/2026",
+          "5 giorni",
           "In programma"
         ],
         [
           "Viale delle Felci",
           "Mattina",
           "Controllare altezza erba",
-          "23/06/2026",
+          "5 giorni",
           "Controllo da fare"
         ]
       ],
@@ -754,7 +754,7 @@
     {
       "name": "CalcoloScadenzeVerde",
       "title": "Gantt degli interventi sul verde",
-      "description": "Diagramma temporale con filtri, stati distinguibili e apertura delle schede.",
+      "description": "Periodi fissi di 5 giorni con filtri, stati e apertura delle schede.",
       "role": "section",
       "pageId": "registro-interventi",
       "position": "top"
