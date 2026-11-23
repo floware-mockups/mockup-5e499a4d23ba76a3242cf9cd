@@ -1,0 +1,234 @@
+{
+  "title": "Piano di manutenzione del verde",
+  "description": "Gestisci tagli dell’erba, turni e scadenze delle aree comunali. Aggiorna le precedenze quando il maltempo o un lavoro urgente cambia il programma.",
+  "accent": "emerald",
+  "pages": [
+    {
+      "id": "quadro-verde",
+      "title": "Quadro del verde",
+      "description": "Controlla le scadenze vicine, i sopralluoghi e gli interventi da riprogrammare.",
+      "metrics": [
+        {
+          "label": "Interventi in programma",
+          "value": "12"
+        },
+        {
+          "label": "Tagli in scadenza entro 7 giorni",
+          "value": "5"
+        },
+        {
+          "label": "Da riprogrammare per maltempo",
+          "value": "2"
+        },
+        {
+          "label": "Lavori urgenti",
+          "value": "1"
+        }
+      ],
+      "columns": [
+        "Area",
+        "Intervento",
+        "Scadenza",
+        "Turno",
+        "Stato"
+      ],
+      "rows": [
+        [
+          "Parco Lumo",
+          "Taglio erba",
+          "18/06/2026",
+          "Mattina",
+          "In programma"
+        ],
+        [
+          "Giardino Vela",
+          "Taglio erba",
+          "19/06/2026",
+          "Pomeriggio",
+          "Da riprogrammare"
+        ],
+        [
+          "Prato Nubi",
+          "Taglio erba",
+          "20/06/2026",
+          "Mattina",
+          "In programma"
+        ],
+        [
+          "Viale delle Felci",
+          "Controllo erba",
+          "21/06/2026",
+          "Mattina",
+          "Controllo da fare"
+        ]
+      ],
+      "form": []
+    },
+    {
+      "id": "registro-interventi",
+      "title": "Interventi sul verde",
+      "description": "Cerca e filtra gli interventi. Aggiungi un’area e assegna una scadenza; se cambia la priorità, aggiorna stato e turno.",
+      "metrics": [],
+      "columns": [
+        "Area",
+        "Tipo intervento",
+        "Indirizzo",
+        "Tecnico incaricato",
+        "Data sopralluogo",
+        "Scadenza",
+        "Stato"
+      ],
+      "rows": [
+        [
+          "Parco Lumo",
+          "Taglio erba",
+          "Via delle Lanterne 12",
+          "Rivo",
+          "16/06/2026",
+          "18/06/2026",
+          "In programma"
+        ],
+        [
+          "Giardino Vela",
+          "Taglio erba",
+          "Vicolo dei Salici 4",
+          "Mira",
+          "17/06/2026",
+          "19/06/2026",
+          "Da riprogrammare"
+        ],
+        [
+          "Prato Nubi",
+          "Taglio erba",
+          "Piazza delle Cicale 3",
+          "Timo",
+          "18/06/2026",
+          "20/06/2026",
+          "In programma"
+        ],
+        [
+          "Viale delle Felci",
+          "Controllo erba",
+          "Corso dei Gelsi 8",
+          "Leda",
+          "18/06/2026",
+          "21/06/2026",
+          "Controllo da fare"
+        ],
+        [
+          "Radura Zefiro",
+          "Taglio erba",
+          "Strada dei Ranuncoli 6",
+          "Rivo",
+          "19/06/2026",
+          "22/06/2026",
+          "In programma"
+        ],
+        [
+          "Parco delle Lucciole",
+          "Taglio erba",
+          "Via delle Ninfee 15",
+          "Mira",
+          "19/06/2026",
+          "23/06/2026",
+          "Lavoro urgente"
+        ],
+        [
+          "Prato Mirto",
+          "Taglio erba",
+          "Largo delle Margherite 2",
+          "Timo",
+          "20/06/2026",
+          "24/06/2026",
+          "In programma"
+        ],
+        [
+          "Giardino Brina",
+          "Controllo erba",
+          "Via dei Papaveri 9",
+          "Leda",
+          "20/06/2026",
+          "25/06/2026",
+          "Controllo da fare"
+        ]
+      ],
+      "form": [
+        "Area",
+        "Tipo intervento",
+        "Indirizzo",
+        "Tecnico incaricato",
+        "Data sopralluogo",
+        "Scadenza",
+        "Stato"
+      ]
+    },
+    {
+      "id": "turni-e-priorita",
+      "title": "Turni e priorità",
+      "description": "Rivedi il programma della settimana. Se piove o arriva un lavoro urgente, sposta il turno e assegna una nuova scadenza.",
+      "metrics": [
+        {
+          "label": "Turni questa settimana",
+          "value": "8"
+        },
+        {
+          "label": "Da spostare",
+          "value": "2"
+        },
+        {
+          "label": "Controlli in attesa",
+          "value": "2"
+        }
+      ],
+      "columns": [
+        "Area",
+        "Turno",
+        "Motivo",
+        "Nuova scadenza",
+        "Stato"
+      ],
+      "rows": [
+        [
+          "Giardino Vela",
+          "Pomeriggio",
+          "Pioggia prevista",
+          "19/06/2026",
+          "Da riprogrammare"
+        ],
+        [
+          "Parco delle Lucciole",
+          "Mattina",
+          "Lavoro urgente",
+          "23/06/2026",
+          "Priorità alta"
+        ],
+        [
+          "Parco Lumo",
+          "Mattina",
+          "Turno confermato",
+          "18/06/2026",
+          "In programma"
+        ],
+        [
+          "Prato Nubi",
+          "Mattina",
+          "Turno confermato",
+          "20/06/2026",
+          "In programma"
+        ],
+        [
+          "Viale delle Felci",
+          "Mattina",
+          "Controllare altezza erba",
+          "21/06/2026",
+          "Controllo da fare"
+        ]
+      ],
+      "form": []
+    }
+  ],
+  "theme": {
+    "palette": "terracotta",
+    "fonts": "classico"
+  }
+}
