@@ -35,21 +35,21 @@
       "rows": [
         [
           "Parco Lumo",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "18/06/2026",
           "Mattina",
           "In programma"
         ],
         [
           "Giardino Vela",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "19/06/2026",
           "Mattina",
           "Da riprogrammare"
         ],
         [
           "Prato Nubi",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "22/06/2026",
           "Mattina",
           "In programma"
@@ -82,7 +82,7 @@
       "rows": [
         [
           "Parco Lumo",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "Via delle Lanterne 12",
           "Rivo",
           "16/06/2026",
@@ -92,7 +92,7 @@
         ],
         [
           "Giardino Vela",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "Vicolo dei Salici 4",
           "Mira",
           "17/06/2026",
@@ -102,7 +102,7 @@
         ],
         [
           "Prato Nubi",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "Piazza delle Cicale 3",
           "Timo",
           "18/06/2026",
@@ -122,7 +122,7 @@
         ],
         [
           "Radura Zefiro",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "Strada dei Ranuncoli 6",
           "Rivo",
           "19/06/2026",
@@ -132,7 +132,7 @@
         ],
         [
           "Parco delle Lucciole",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "Via delle Ninfee 15",
           "Mira",
           "19/06/2026",
@@ -142,7 +142,7 @@
         ],
         [
           "Prato Mirto",
-          "Taglio erba",
+          "Sfalcio con macchina multifunzionale",
           "Largo delle Margherite 2",
           "Timo",
           "22/06/2026",
@@ -158,6 +158,106 @@
           "22/06/2026",
           "25/06/2026",
           "Controllo da fare",
+          "Mattina"
+        ],
+        [
+          "Parco delle Querce",
+          "Sfalcio con macchina multifunzionale",
+          "Via dei Tigli 21",
+          "Rivo",
+          "23/06/2026",
+          "25/06/2026",
+          "In programma",
+          "Mattina"
+        ],
+        [
+          "Parco del Borgo",
+          "Sfalcio con macchina multifunzionale",
+          "Via del Mulino 7",
+          "Mira",
+          "23/06/2026",
+          "26/06/2026",
+          "In programma",
+          "Mattina"
+        ],
+        [
+          "Parco delle Fontane",
+          "Sfalcio con macchina multifunzionale",
+          "Viale delle Acacie 18",
+          "Timo",
+          "24/06/2026",
+          "26/06/2026",
+          "Da riprogrammare",
+          "Mattina"
+        ],
+        [
+          "Parco Aurora",
+          "Sfalcio con macchina multifunzionale",
+          "Via del Poggio 32",
+          "Leda",
+          "24/06/2026",
+          "27/06/2026",
+          "In programma",
+          "Mattina"
+        ],
+        [
+          "Parco del Cedro",
+          "Sfalcio con macchina multifunzionale",
+          "Piazza dei Platani 5",
+          "Rivo",
+          "25/06/2026",
+          "27/06/2026",
+          "In programma",
+          "Mattina"
+        ],
+        [
+          "Ciglio stradale – Via del Porto",
+          "Sfalcio ciglio stradale",
+          "Via del Porto, tratto nord",
+          "Mira",
+          "25/06/2026",
+          "29/06/2026",
+          "In programma",
+          "Mattina"
+        ],
+        [
+          "Ciglio stradale – Via dei Pini",
+          "Sfalcio ciglio stradale",
+          "Via dei Pini, tratto est",
+          "Timo",
+          "26/06/2026",
+          "29/06/2026",
+          "Controllo da fare",
+          "Mattina"
+        ],
+        [
+          "Ciglio stradale – Strada Nuova",
+          "Sfalcio ciglio stradale",
+          "Strada Nuova, tratto sud",
+          "Leda",
+          "26/06/2026",
+          "30/06/2026",
+          "In programma",
+          "Mattina"
+        ],
+        [
+          "Ciglio stradale – Viale del Sole",
+          "Sfalcio ciglio stradale",
+          "Viale del Sole, tratto ovest",
+          "Rivo",
+          "29/06/2026",
+          "01/07/2026",
+          "In programma",
+          "Mattina"
+        ],
+        [
+          "Ciglio stradale – Via delle Vigne",
+          "Sfalcio ciglio stradale",
+          "Via delle Vigne, tratto centrale",
+          "Mira",
+          "29/06/2026",
+          "02/07/2026",
+          "Lavoro urgente",
           "Mattina"
         ]
       ],
@@ -234,6 +334,155 @@
         ]
       ],
       "form": []
+    },
+    {
+      "id": "squadra-e-mezzi",
+      "title": "Squadra e mezzi",
+      "description": "Riepilogo delle persone e delle attrezzature disponibili per la manutenzione del verde.",
+      "metrics": [
+        {
+          "label": "Colleghi",
+          "value": "4"
+        },
+        {
+          "label": "Trattori",
+          "value": "1"
+        },
+        {
+          "label": "Decespugliatori",
+          "value": "2"
+        },
+        {
+          "label": "Macchine multifunzionali",
+          "value": "1"
+        }
+      ],
+      "columns": [
+        "Risorsa",
+        "Categoria",
+        "Quantità",
+        "Disponibilità",
+        "Assegnazione"
+      ],
+      "rows": [
+        [
+          "Operatore 1",
+          "Personale",
+          "1",
+          "Disponibile",
+          "Da assegnare"
+        ],
+        [
+          "Operatore 2",
+          "Personale",
+          "1",
+          "Disponibile",
+          "Da assegnare"
+        ],
+        [
+          "Operatore 3",
+          "Personale",
+          "1",
+          "Disponibile",
+          "Da assegnare"
+        ],
+        [
+          "Operatore 4",
+          "Personale",
+          "1",
+          "Disponibile",
+          "Da assegnare"
+        ],
+        [
+          "Trattore",
+          "Mezzo",
+          "1",
+          "Disponibile",
+          "Da assegnare"
+        ],
+        [
+          "Decespugliatore",
+          "Attrezzatura",
+          "2",
+          "Disponibili",
+          "Da assegnare"
+        ],
+        [
+          "Macchina multifunzionale",
+          "Mezzo",
+          "1",
+          "Disponibile",
+          "Sfalcio dei parchi"
+        ]
+      ],
+      "form": [
+        "Risorsa",
+        "Categoria",
+        "Quantità",
+        "Disponibilità",
+        "Assegnazione"
+      ]
+    },
+    {
+      "id": "aree-territoriali",
+      "title": "Aree territoriali",
+      "description": "Suddivisione dimostrativa del territorio per zona e livello di urgenza.",
+      "metrics": [
+        {
+          "label": "Aree ad alta urgenza",
+          "value": "2"
+        },
+        {
+          "label": "Aree a media urgenza",
+          "value": "2"
+        },
+        {
+          "label": "Aree a bassa urgenza",
+          "value": "2"
+        }
+      ],
+      "columns": [
+        "Area",
+        "Zona",
+        "Urgenza"
+      ],
+      "rows": [
+        [
+          "Parco Lumo",
+          "Centro",
+          "Alta"
+        ],
+        [
+          "Giardino Vela",
+          "Centro",
+          "Alta"
+        ],
+        [
+          "Prato Nubi",
+          "Periurbana",
+          "Media"
+        ],
+        [
+          "Viale delle Felci",
+          "Periurbana",
+          "Media"
+        ],
+        [
+          "Radura Zefiro",
+          "Agricola",
+          "Bassa"
+        ],
+        [
+          "Parco delle Querce",
+          "Agricola",
+          "Bassa"
+        ]
+      ],
+      "form": [
+        "Area",
+        "Zona",
+        "Urgenza"
+      ]
     }
   ],
   "theme": {
@@ -242,12 +491,6 @@
   },
   "custom": [
     {
-      "name": "SchedaProgrammazioneFeriale",
-      "title": "Programmazione feriale al mattino",
-      "description": "Modifica della scheda con validazione prima del salvataggio.",
-      "role": "detail"
-    },
-    {
       "name": "ConfermaInserimentoFeriale",
       "title": "Controllo nuovi inserimenti",
       "description": "Blocca gli inserimenti con turno non consentito o date non feriali.",
@@ -255,6 +498,12 @@
       "events": [
         "add"
       ]
+    },
+    {
+      "name": "SchedaProgrammazioneFeriale",
+      "title": "Programmazione feriale al mattino",
+      "description": "Modifica con controllo dei giorni feriali e attrezzatura automatica in base al guardrail.",
+      "role": "detail"
     }
   ]
 }
