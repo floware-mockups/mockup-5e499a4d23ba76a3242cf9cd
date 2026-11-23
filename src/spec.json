@@ -725,8 +725,8 @@
     }
   ],
   "theme": {
-    "palette": "terracotta",
-    "fonts": "classico"
+    "palette": "delta-sabbia",
+    "fonts": "alta-leggibilita"
   },
   "custom": [
     {
